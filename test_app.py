@@ -1,26 +1,23 @@
 import pytest
 from app import app
+from datetime import date
 
 
-@pytest.fixture()
-def app():
-    app = create_app()
-    app.config.update({
-        "TESTING": True,
-    })
-
-    # other setup can go here
-
-    yield app
-
-    # clean up / reset resources here
+def test_today(client):
+    response = client.get("/pageOne")
+    today = date.today()
+    assert today in response.data
 
 
-@pytest.fixture()
-def client(app):
-    return app.test_client()
+def test_Month(client):
+    response = client.get("/pageTwo")
+    month = date.today()
+    month = month.strftime("%B")
+    assert month in response.data
 
 
-@pytest.fixture()
-def runner(app):
-    return app.test_cli_runner()
+def test_Month(client):
+    response = client.get("/pageTwo")
+    weekday = date.today()
+    weekday = weekday.strftime("%A")
+    assert weekday in response.data
