@@ -1,15 +1,16 @@
 import pytest
-from app import app
 from datetime import date
 
 
 def test_today(client):
+    """Verifies todays date"""
     response = client.get("/pageOne")
     today = date.today()
     assert today in response.data
 
 
 def test_Month(client):
+    """Verifies the month"""
     response = client.get("/pageTwo")
     month = date.today()
     month = month.strftime("%B")
@@ -17,6 +18,7 @@ def test_Month(client):
 
 
 def test_Month(client):
+    """Verifies the weekday"""
     response = client.get("/pageTwo")
     weekday = date.today()
     weekday = weekday.strftime("%A")
