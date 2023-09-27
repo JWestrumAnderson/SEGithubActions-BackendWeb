@@ -1,6 +1,12 @@
-import pytest
+"""_summary_ Returns: _type_: _description_"""
 from datetime import date
+import pytest
+from app import app
 
+
+@pytest.fixture()
+def client():
+    return app.test_client()    
 
 def test_today(client):
     """Verifies todays date"""
@@ -9,7 +15,7 @@ def test_today(client):
     assert today in response.data
 
 
-def test_Month(client):
+def test_month(client):
     """Verifies the month"""
     response = client.get("/pageTwo")
     month = date.today()
@@ -17,7 +23,7 @@ def test_Month(client):
     assert month in response.data
 
 
-def test_Month(client):
+def test_weekday(client):
     """Verifies the weekday"""
     response = client.get("/pageTwo")
     weekday = date.today()
